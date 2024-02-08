@@ -7,10 +7,11 @@ import "react-clock/dist/Clock.css";
 
 function App() {
   const [count, setCount] = useState(0);
-  const [value, setValue] = useState(new Date());
+  const [clockValue, setClockValue] = useState(new Date());
+  const [jwt, setJwt] = useState("");
 
   useEffect(() => {
-    const interval = setInterval(() => setValue(new Date()), 1000);
+    const interval = setInterval(() => setClockValue(new Date()), 1000);
 
     return () => {
       clearInterval(interval);
@@ -28,7 +29,7 @@ function App() {
         </a>
       </div> */}
       <div className="clock">
-        <Clock value={value} />
+        <Clock value={clockValue} />
       </div>
       <h1>CardAgain</h1>
       <div className="card">
