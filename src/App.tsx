@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import AnalogClock from "./components/Clock/AnalogClock";
-import { TextInput } from "@mantine/core";
+import { Button, TextInput } from "@mantine/core";
 import WorkerStatus from "./components/WorkerStatus";
 
 function App() {
@@ -21,13 +21,16 @@ function App() {
           {jwt.length > 0 ? (
             <WorkerStatus />
           ) : (
-            <TextInput
-              label="Employee ID"
-              value={employeeId}
-              onChange={(e) => {
-                onEmployeeIdTextChange(e);
-              }}
-            />
+            <>
+              <TextInput
+                label="Employee ID"
+                value={employeeId}
+                onChange={(e) => {
+                  onEmployeeIdTextChange(e);
+                }}
+              />
+              <Button onClick={() => {}}>Login</Button>
+            </>
           )}
         </>
       </div>
