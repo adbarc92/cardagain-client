@@ -1,44 +1,35 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useState } from "react";
 import "./App.css";
-import Clock from "react-clock";
-import "react-clock/dist/Clock.css";
+import AnalogClock from "./components/Clock/AnalogClock";
+import { TextInput } from "@mantine/core";
+import WorkerStatus from "./components/WorkerStatus";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [clockValue, setClockValue] = useState(new Date());
   const [jwt, setJwt] = useState("");
+  const [employeeId, setEmployeeId] = useState("");
 
-  useEffect(() => {
-    const interval = setInterval(() => setClockValue(new Date()), 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  const onEmployeeIdTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmployeeId(e.target.value);
+  };
 
   return (
     <>
-      {/* <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div> */}
-      <div className="clock">
-        <Clock value={clockValue} />
-      </div>
+      <AnalogClock />
       <h1>CardAgain</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        {/* <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p> */}
+      <div>
+        <>
+          {jwt.length > 0 ? (
+            <WorkerStatus />
+          ) : (
+            <TextInput
+              label="Employee ID"
+              value={employeeId}
+              onChange={(e) => {
+                onEmployeeIdTextChange(e);
+              }}
+            />
+          )}
+        </>
       </div>
     </>
   );
