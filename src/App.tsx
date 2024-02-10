@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import AnalogClock from "./components/Clock/AnalogClock";
 import { TextInput } from "@mantine/core";
+import WorkerStatus from "./components/WorkerStatus";
 
 function App() {
   const [jwt, setJwt] = useState("");
@@ -16,13 +17,19 @@ function App() {
       <AnalogClock />
       <h1>CardAgain</h1>
       <div>
-        <TextInput
-          label="Employee ID"
-          value={employeeId}
-          onChange={(e) => {
-            onEmployeeIdTextChange(e);
-          }}
-        />
+        <>
+          {jwt.length > 0 ? (
+            <WorkerStatus />
+          ) : (
+            <TextInput
+              label="Employee ID"
+              value={employeeId}
+              onChange={(e) => {
+                onEmployeeIdTextChange(e);
+              }}
+            />
+          )}
+        </>
       </div>
     </>
   );
